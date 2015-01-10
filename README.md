@@ -26,7 +26,6 @@ _If you forget the dh.pem file, it will be created at the first start - but this
 
     docker run -d \
     -p 80:80 -p 443:443 \
-    -e 'DH_SIZE=512' \
     -v $EXT_DIR:/etc/apache2/external/ \
     marvambass/apache2-ssl-secure
 
@@ -35,12 +34,6 @@ _If you forget the dh.pem file, it will be created at the first start - but this
 This Dockerfile is based on the [/_/ubuntu:14.04/](https://registry.hub.docker.com/_/ubuntu/) Official Image.
 
 ## Cheat Sheet
-
-### Creating the dh.pem with openssl
-
-To create a Diffie-Hellman cert, you can use the following command
-
-    openssl dhparam -out dh.pem 2048
 
 ### Creating a high secure SSL CSR with openssl
 

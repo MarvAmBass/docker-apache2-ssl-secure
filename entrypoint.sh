@@ -66,4 +66,4 @@ cp /etc/apache2/external/*.conf /etc/apache2/sites-enabled/ 2> /dev/null > /dev/
 # exec CMD
 echo ">> exec docker CMD"
 echo "$@"
-"$@"
+exec "$@"

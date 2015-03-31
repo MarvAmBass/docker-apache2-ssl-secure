@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 MAINTAINER MarvAmBass
 
+ENV LANG C.UTF-8
+
 RUN apt-get update && apt-get install -y \
     apache2 \
     openssl

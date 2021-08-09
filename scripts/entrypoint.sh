@@ -60,10 +60,14 @@ then
   -days 3650 -nodes -sha256
 fi
 
+if [ ! -z ${TZ+x} ]
+then
+  echo "setting timezone to: $TZ"
+  timedatectl set-timezone "$TZ"
+fi
+
 echo ">> copy /etc/apache2/external/*.conf files to /etc/apache2/sites-enabled/"
 cp /etc/apache2/external/*.conf /etc/apache2/sites-enabled/ 2> /dev/null > /dev/null
 
-# exec CMD
-echo ">> exec docker CMD"
-echo "$@"
-exec "$@"
+echo ">> starting services"
+exec runsvdir -P /container/config/runit

@@ -15,7 +15,6 @@ RUN apt-get -q -y update && \
     apt-get -q -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     \
-    \
     rm -rf /var/www/html/*; rm -rf /etc/apache2/sites-enabled/* && \
     mkdir -p /etc/apache2/external && \
     \

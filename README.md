@@ -1,11 +1,12 @@
-# Docker very secured Apache2 with secure SSL (marvambass/apache2-ssl-secure)
+# apache2 - (marvambass/apache2-ssl-secure) (+ optional tls & php) on debian [x86 + arm]
+
 _maintained by MarvAmBass_
 
 ## What is it
 
 This Dockerfile (available as ___marvambass/apache2-ssl-secure___) gives you a ready to use secured production apache2 server, with php and good configured optional SSL.
 
-View in Docker Registry [marvambass/apache2-ssl-secure](https://registry.hub.docker.com/u/marvambass/apache2-ssl-secure/)
+View in Docker Registry [marvambass/apache2-ssl-secure](https://hub.docker.com/r/marvambass/apache2-ssl-secure)
 
 View in GitHub [MarvAmBass/docker-apache2-ssl-secure](https://github.com/MarvAmBass/docker-apache2-ssl-secure)
 

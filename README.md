@@ -10,7 +10,7 @@ View in Docker Registry [marvambass/apache2-ssl-secure](https://hub.docker.com/r
 
 View in GitHub [MarvAmBass/docker-apache2-ssl-secure](https://github.com/MarvAmBass/docker-apache2-ssl-secure)
 
-This Dockerfile is based on the [/_/debian:10/](https://registry.hub.docker.com/_/debian/) Official Image.
+This Dockerfile is based on the [/_/debian:buster/](https://registry.hub.docker.com/_/debian/) Official Image.
 
 ## Changelogs
 

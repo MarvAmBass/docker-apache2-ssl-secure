@@ -36,34 +36,32 @@ If you want to add your own VirtualHosts Configuration, you can copy the followi
 
 EOF
 
-if [ ! -z ${HSTS_HEADERS_ENABLE+x} ]
-then
-  echo ">> HSTS Headers enabled"
-  sed -i 's/#Header add Strict-Transport-Security/Header add Strict-Transport-Security/g' /etc/apache2/sites-enabled/001-default-ssl
+if [ -z "$DISABLE_TLS" ]; then
+	if [ ! -z ${HSTS_HEADERS_ENABLE+x} ]
+	then
+	echo ">> HSTS Headers enabled"
+	sed -i 's/#Header add Strict-Transport-Security/Header add Strict-Transport-Security/g' /etc/apache2/sites-enabled/001-default-ssl
 
-  if [ ! -z ${HSTS_HEADERS_ENABLE_NO_SUBDOMAINS+x} ]
-  then
-    echo ">> HSTS Headers configured without includeSubdomains"
-    sed -i 's/; includeSubdomains//g' /etc/apache2/sites-enabled/001-default-ssl
-  fi
+	if [ ! -z ${HSTS_HEADERS_ENABLE_NO_SUBDOMAINS+x} ]
+	then
+		echo ">> HSTS Headers configured without includeSubdomains"
+		sed -i 's/; includeSubdomains//g' /etc/apache2/sites-enabled/001-default-ssl
+	fi
+	else
+	echo ">> HSTS Headers disabled"
+	fi
+
+	if [ ! -e "/etc/apache2/external/cert.pem" ] || [ ! -e "/etc/apache2/external/key.pem" ]
+	then
+	echo ">> generating self signed cert"
+	openssl req -x509 -newkey rsa:4086 \
+	-subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=localhost" \
+	-keyout "/etc/apache2/external/key.pem" \
+	-out "/etc/apache2/external/cert.pem" \
+	-days 3650 -nodes -sha256
+	fi
 else
-  echo ">> HSTS Headers disabled"
-fi
-
-if [ ! -e "/etc/apache2/external/cert.pem" ] || [ ! -e "/etc/apache2/external/key.pem" ]
-then
-  echo ">> generating self signed cert"
-  openssl req -x509 -newkey rsa:4086 \
-  -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=localhost" \
-  -keyout "/etc/apache2/external/key.pem" \
-  -out "/etc/apache2/external/cert.pem" \
-  -days 3650 -nodes -sha256
-fi
-
-if [ ! -z ${TZ+x} ]
-then
-  echo "setting timezone to: $TZ"
-  timedatectl set-timezone "$TZ"
+  rm /etc/apache2/sites-enabled/001-default-ssl.conf
 fi
 
 echo ">> copy /etc/apache2/external/*.conf files to /etc/apache2/sites-enabled/"

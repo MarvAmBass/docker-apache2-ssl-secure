@@ -3,7 +3,7 @@ FROM debian:bullseye
 ENV LANG=C.UTF-8 DEBIAN_FRONTEND=noninteractive APACHE_RUN_USER=www-data APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=/var/log/apache2
 
 RUN apt-get -q -y update && \
-    apt-get --no-install-recommends -y install runit apache2 libapache2-mod-php php openssl && \
+    apt-get --no-install-recommends -y install runit apache2 libapache2-mod-php php openssl php-7.4-xml && \
     apt-get -q -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     \
